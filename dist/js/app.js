@@ -9,7 +9,15 @@ const rateValue = document.querySelector("#rate-value")
 const pitch = document.querySelector("#pitch")
 const pitchValue = document.querySelector("#pitch-value")
 const voiceSelect = document.querySelector("#voice-select")
+const optGroup = document.querySelector("optgroup")
+const body = document.querySelector("body")
 
+//Browser identifier
+// Firefox 1.0+
+var isFirefox = typeof InstallTrigger !== 'undefined';
+
+// Chrome 1+
+var isChrome = !!window.chrome && !!window.chrome.webstore;
 
 // Fetch Voices Using API
 // Init Voice Array
@@ -24,17 +32,23 @@ const getVoices = () => {
        const option = document.createElement("option")
        option.textContent =`${voice.name} (${voice.lang})`;
        // console.log(`${voice.name} (${voice.lang})`)
+       option.style.fontSize="15px"
        option.setAttribute("data-name", voice.name)
        option.setAttribute("data-lang", voice.lang)
-       voiceSelect.appendChild(option)
+       optGroup.appendChild(option)
 
    })
 }
 getVoices()
 // getVoices is an async function, hence we need to use onvoiceschanged event first, so the getVoices() won't return an empty array
+if (isFirefox) {
+    getVoices();
+} else {
 if (synth.onvoiceschanged !== undefined) {
-    synth.onvoiceschanged = getVoices
+    synth.onvoiceschanged = getVoices;
 }
+}
+
 
 
 // Function Speak
@@ -46,21 +60,29 @@ const speak = () => {
     }
     // Make sure the text area is not an empty
     if (textInput.value !== '') {
+        // Add background animation
+        body.style.background = '#141414 url(img/wave.gif)';
+        body.style.backgroundRepeat = 'repeat-x';
+        body.style.backgroundSize = 'auto 100vh';
+
         const speakText = new SpeechSynthesisUtterance(textInput.value)
-        // When speak ends
+        // When speech ends
         speakText.onend = e => {
             console.log("Done speaking...")
+            body.style.background = "#141414 url('img/milky-way-starry-sky-night-sky-star-956999.jpeg')"
+            body.style.backgroundSize = 'cover';
         }
-        // Speak error
+        // Speech error
         speakText.onerror = e => {
             console.error("Err")
         }
         // Selected voice
         const selectedVoice = voiceSelect.selectedOptions[0].getAttribute("data-name")
-        console.log(selectedVoice)
+        console.log(voiceSelect)
+
         // Loop through voices 
         voices.forEach(voice => {
-            if (voice.name = selectedVoice) {
+            if (voice.name === selectedVoice) {
                 speakText.voice = voice
             }
         })
@@ -72,4 +94,23 @@ const speak = () => {
         //Speaking
         synth.speak(speakText)
     }
+    else {
+        alert("Remember to type your content first (^_^)")
+    }
 }
+
+// Event Listeners
+
+// Text form submit
+textForm.addEventListener("submit", e => {
+    e.preventDefault()
+    speak()
+    textInput.blur()
+})
+
+// Rate & Pitch value change
+rate.addEventListener('change', e => rateValue.textContent = rate.value)
+pitch.addEventListener('change', e => pitchValue.textContent = pitch.value)
+
+// Selected voice change
+voiceSelect.addEventListener('change', e => speak())

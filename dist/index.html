@@ -4,15 +4,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text To Speech</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Orbitron', sans-serif;
+        }
+        body {
+          background: #141414 url("img/milky-way-starry-sky-night-sky-star-956999.jpeg");
+          background-size: cover;
+        }
+        .ai-chat-logo {
+          max-width: 200px;
+        }
+        video {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+        }
+        .video-wrapper {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+        textarea::placeholder,
+        .btn,
+        optgroup,
+        #voice-select {
+            font-size: 15px;
+        }
+        .btn {
+            background: linear-gradient(45deg, #614ad3, #e42c64);
+            font-weight: 600;
+            color: white
+        }
+        .badge {
+            background: linear-gradient(45deg, #614ad3, #e42c64);
+        }
+        .btn:hover {
+            scale: 1.04;
+            transition: all 0.05s linear
+        }
+        
+
+    </style>
+    <title>AI Talk</title>   
 </head>
 <body class="bg-dark text-white">
+<div class="video-wrapper">
+        <video playsinline autoplay muted loop>
+            <source src="img/video_speech.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video> 
 <div class="container text-center">
-    <img src="img/speech.png" alt="Text to speech image" class="mb-5">
     <div class="row">
         <div class="col-md-6 mx-auto">
+            <h2 class="welcome-msg mb-3">WELCOME TO AI TALK</h2>
+            <img class="ai-chat-logo" src="img/ai-chat.png" alt="Text to speech image">
             <form class="mb-5">
                 <div class="form-group">
                     <textarea placeholder="Type something here" name="" id="text-input" class="form-control form-control-lg"></textarea>
@@ -28,13 +88,19 @@
                     <input type="range" id="pitch" class="custom-range" min="0" max="2" value="1" step="0.1">
                 </div>
                 <div class="form-group">
-                    <select id="voice-select" class="form-control form-control-lg"></select>
+                    <select id="voice-select" class="form-control form-control-lg">
+                            <optgroup>
+                            </optgroup>
+                    </select>
                 </div>
                 <button class="btn btn-light btn-lg btn-block">Speak Now</button>
             </form>
         </div>
     </div>
 </div>
+</div>
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
