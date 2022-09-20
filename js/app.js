@@ -73,13 +73,13 @@ const speak = () => {
         // Add background animation
         body.style.background = '#141414 url(img/wave.gif)';
         body.style.backgroundRepeat = 'repeat-x';
-        body.style.backgroundSize = 'auto 100vh';
+        body.style.backgroundSize = 'cover';
 
         const speakText = new SpeechSynthesisUtterance(textInput.value)
         // When speech ends
         speakText.onend = e => {
             console.log("Done speaking...")
-            body.style.background = "#141414 url('img/milky-way-starry-sky-night-sky-star-956999.jpeg')"
+            body.style.background = "#141414 url('img/video_speech.gif')"
             body.style.backgroundSize = 'cover';
         }
         // Speech error
@@ -105,7 +105,7 @@ const speak = () => {
         synth.speak(speakText)
     }
     else {
-        const reminderSpeech = new SpeechSynthesisUtterance("Remember to type your content first")
+        const reminderSpeech = new SpeechSynthesisUtterance("Type your content first")
         const selectedVoice = voiceSelect.selectedOptions[0].getAttribute("data-name")
         voices.forEach(voice => {
             if (voice.name === selectedVoice) {
