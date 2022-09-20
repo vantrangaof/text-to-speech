@@ -49,7 +49,17 @@ if (synth.onvoiceschanged !== undefined) {
 }
 }
 
-
+window.addEventListener('DOMContentLoaded', () => {
+    const welcomeSpeech = new SpeechSynthesisUtterance("Hi, I am AI Talk, your assistant! Hope you will have a nice day")
+     // Loop through voices 
+     voices.forEach(voice => {
+        if (voice.name === "Victoria") {
+            welcomeSpeech.voice = voice
+        }
+    })
+    welcomeSpeech.rate = 1
+    synth.speak(welcomeSpeech)
+});
 
 // Function Speak
 const speak = () => {
@@ -61,7 +71,7 @@ const speak = () => {
     // Make sure the text area is not an empty
     if (textInput.value !== '') {
         // Add background animation
-        body.style.background = '#141414 url(dist/img/wave.gif)';
+        body.style.background = '#141414 url(img/wave.gif)';
         body.style.backgroundRepeat = 'repeat-x';
         body.style.backgroundSize = 'auto 100vh';
 
@@ -69,7 +79,7 @@ const speak = () => {
         // When speech ends
         speakText.onend = e => {
             console.log("Done speaking...")
-            body.style.background = "#141414 url('dist/img/milky-way-starry-sky-night-sky-star-956999.jpeg')"
+            body.style.background = "#141414 url('img/milky-way-starry-sky-night-sky-star-956999.jpeg')"
             body.style.backgroundSize = 'cover';
         }
         // Speech error
@@ -95,7 +105,14 @@ const speak = () => {
         synth.speak(speakText)
     }
     else {
-        alert("Remember to type your content first (^_^)")
+        const reminderSpeech = new SpeechSynthesisUtterance("Remember to type your content first")
+        const selectedVoice = voiceSelect.selectedOptions[0].getAttribute("data-name")
+        voices.forEach(voice => {
+            if (voice.name === selectedVoice) {
+                reminderSpeech.voice = voice
+            }
+        })
+        synth.speak(reminderSpeech)
     }
 }
 
