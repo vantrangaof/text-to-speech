@@ -1,8 +1,10 @@
 * {
     font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    box-sizing: border-box;
 }
 body {
-  background: #141414 url("img/milky-way-starry-sky-night-sky-star-956999.jpeg");
+  background: #141414 url("img/video_speech.gif");
   background-size: cover;
 }
 .ai-chat-logo {
