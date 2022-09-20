@@ -1,0 +1,47 @@
+* {
+    font-family: 'Orbitron', sans-serif;
+}
+body {
+  background: #141414 url("img/milky-way-starry-sky-night-sky-star-956999.jpeg");
+  background-size: cover;
+}
+.ai-chat-logo {
+  max-width: 200px;
+}
+video {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.video-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+textarea::placeholder,
+.btn,
+optgroup,
+#voice-select {
+    font-size: 15px;
+}
+.btn {
+    background: linear-gradient(45deg, #614ad3, #e42c64);
+    font-weight: 600;
+    color: white
+}
+.badge {
+    background: linear-gradient(45deg, #614ad3, #e42c64);
+}
+.btn:hover {
+    scale: 1.04;
+    transition: all 0.05s linear;
+    color: white
+}
